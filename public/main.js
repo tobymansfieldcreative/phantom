@@ -25,7 +25,7 @@ const scrollTrigger = {
 };
 
 // LOGO
-loader.load('BoxFiveLogo.glb', gltf => {
+loader.load('https://phantom-scene.vercel.app/BoxFiveLogo.glb', gltf => {
   const logo = gltf.scene;
   logo.scale.set(1.5, 1.5, 1.5);
   logo.position.set(0.2, 0, 4);
