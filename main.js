@@ -1,7 +1,3 @@
-import * as THREE from 'three';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
 gsap.registerPlugin(ScrollTrigger);
 
 const canvas = document.getElementById('scene');
@@ -14,12 +10,13 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const geometry = new THREE.SphereGeometry();
-const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+scene.background = new THREE.Color(0x111111); // dark grey
+const material = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // red
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
 
-const light = new THREE.PointLight(0xffffff, 1);
-light.position.set(10, 10, 10);
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(5, 10, 7.5);
 scene.add(light);
 
 function animate() {
