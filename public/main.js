@@ -88,6 +88,7 @@ camera.position.set(0, 0.2, 5);
 // ANIMATION LOOP
 function animate() {
   requestAnimationFrame(animate);
+  animateFog();
   renderer.render(scene, camera);
 }
 animate();
