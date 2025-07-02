@@ -16,6 +16,41 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 // LOADER
 const loader = new GLTFLoader();
 
+const textureLoader = new THREE.TextureLoader();
+
+const fogBase = textureLoader.load('/textures/fogbase.png');
+const fogMid = textureLoader.load('/textures/fogwispy1.png');
+const fogTop = textureLoader.load('/textures/fogwispy2.png');
+
+// 2. Create fog layers
+function createFogLayer(texture, y, zIndex = 0.01) {
+  const material = new THREE.MeshBasicMaterial({
+    map: texture,
+    transparent: true,
+    depthWrite: false, // Prevents weird z-fighting
+    opacity: 1,
+  });
+
+  const geometry = new THREE.PlaneGeometry(10, 5); // Width, Height
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(0, y, zIndex);
+  return mesh;
+}
+
+// 3. Add fog layers to scene
+const fogLayer1 = createFogLayer(fogBase, 0);
+const fogLayer2 = createFogLayer(fogMid, 0.1);
+const fogLayer3 = createFogLayer(fogTop, 0.2);
+
+scene.add(fogLayer1, fogLayer2, fogLayer3);
+
+// 4. Animate layers
+function animateFog() {
+  fogLayer2.position.x += 0.001; // Subtle drift
+  fogLayer3.position.x -= 0.002;
+}
+
+
 // SCROLL TRIGGER
 const scrollTrigger = {
   trigger: document.body,
